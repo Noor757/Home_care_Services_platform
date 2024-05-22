@@ -12,6 +12,25 @@ $userID = $_SESSION['userID'];
 $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the session
 
 
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $orderID = $_POST['order_id'];
+  
+
+    // Update service in the database
+    $sql = "UPDATE orders SET 
+            order_status = 'Accepted'
+            WHERE order_id = '$orderID'";
+    if (mysqli_query($con, $sql)) {
+        echo "Status updated successfully";
+        header("Location: dashboard.php"); // Redirect to services.php after update
+        exit();
+    } else {
+        echo "Error updating status: " . mysqli_error($con);
+    }
+}
+
 ?>
 
 
@@ -190,12 +209,12 @@ if ($stmt = $con->prepare($sql)) {
                 </div>
             </div>';
         }
-        $stmt->close();
+    //    $stmt->close();
     } else {
         echo "Error: " . $con->error;
     }
 
-    $con->close();
+   // $con->close();
     ?>
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
@@ -208,41 +227,55 @@ if ($stmt = $con->prepare($sql)) {
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="card mb-4">
-                                <article class="card-body">
+
+
+                            <?php
+                    
+                    $sql = "SELECT  order_id, service_name, total_price, order_status
+                            FROM orders";
+                            
+                   // $row_count = mysqli_num_rows($con->query("$sql"));
+                    if ($stmt = $con->prepare($sql)) {
+                      //  $stmt->bind_param("i", $user_id);
+                        $stmt->execute();
+                        $stmt->bind_result($order_id, $order_name, $total_price, $order_status);
+
+                        while ($stmt->fetch()) {
+                            echo '<article class="card-body">
                                     <h5 class="card-title">New Requests</h5>
                                     <div class="new-member-list">
                                         <div class="d-flex align-items-center justify-content-between mb-4">
                                             <div class="d-flex align-items-center">
                                                 <img src="imgs/people/avatar-4.png" alt="" class="avatar" />
                                                 <div>
-                                                    <h6>Patric Adams</h6>
-                                                    <p class="text-muted font-xs">Sanfrancisco</p>
+                                                    <h6>' . htmlspecialchars($order_name) . '</h6>
+                                                    <p class="text-muted font-xs">' . htmlspecialchars($total_price) . '</p>
+                                                    <p class="text-muted font-xs">' . htmlspecialchars($order_status) . '</p>
                                                 </div>
                                             </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Accept</a>
+                                            <form id="delete-form" method="post">
+                                <input type="hidden" name="order_id" value=' . htmlspecialchars($order_id) . '>
+                                <button type="submit" name="delete" class="btn btn-sm font-sm btn-light rounded">
+                                   Accept
+                                </button>
+                            </form>
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="imgs/people/avatar-2.png" alt="" class="avatar" />
-                                                <div>
-                                                    <h6>Dilan Specter</h6>
-                                                    <p class="text-muted font-xs">Sanfrancisco</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Accept</a>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="imgs/people/avatar-3.png" alt="" class="avatar" />
-                                                <div>
-                                                    <h6>Tomas Baker</h6>
-                                                    <p class="text-muted font-xs">Sanfrancisco</p>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Accept</a>
-                                        </div>
+                                       
+                                       
                                     </div>
-                                </article>
+                                </article>';
+                            }
+                            $stmt->close();
+                        } else {
+                            echo "Error: " . $con->error;
+                        }
+    
+                        $con->close();
+                        ?>
+
+
+
+
                             </div>
                         </div>
                         <div class="col-lg-7">
