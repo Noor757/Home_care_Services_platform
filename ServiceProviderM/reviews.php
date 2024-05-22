@@ -150,7 +150,7 @@
                                     </td>
                                     <td>23</td>
                                     <td><b>Nanny</b></td>
-                                    <td>Devon Lane</td>
+                                    <td>Bisma</td>
                                     <td>
                                         <ul class="rating-stars">
                                             <li style="width: 60%" class="stars-active">
@@ -163,7 +163,7 @@
                                     </td>
                                     <td>10.03.2020</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                      
                                        
                                         <!-- dropdown //end -->
                                     </td>
@@ -174,7 +174,7 @@
                                     </td>
                                     <td>24</td>
                                     <td><b>Mechanic</b></td>
-                                    <td>Guy Hawkins</td>
+                                    <td>Noor</td>
                                     <td>
                                         <ul class="rating-stars">
                                             <li style="width: 80%" class="stars-active">
@@ -187,7 +187,7 @@
                                     </td>
                                     <td>04.12.2019</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                       
                                        
                                         <!-- dropdown //end -->
                                     </td>
@@ -198,7 +198,7 @@
                                     </td>
                                     <td>25</td>
                                     <td><b>Electrician</b></td>
-                                    <td>Steven John</td>
+                                    <td>Zain</td>
                                     <td>
                                         <ul class="rating-stars">
                                             <li style="width: 90%" class="stars-active">
@@ -211,7 +211,7 @@
                                     </td>
                                     <td>25.05.2020</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                        
                                         
                                         <!-- dropdown //end -->
                                     </td>
@@ -222,7 +222,7 @@
                                     </td>
                                     <td>26</td>
                                     <td><b>Gardener</b></td>
-                                    <td>Kristin Watson</td>
+                                    <td>Rida</td>
                                     <td>
                                         <ul class="rating-stars">
                                             <li style="width: 90%" class="stars-active">
@@ -235,7 +235,7 @@
                                     </td>
                                     <td>01.06.2020</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                       
                                       
                                         <!-- dropdown //end -->
                                     </td>
@@ -246,7 +246,7 @@
                                     </td>
                                     <td>27</td>
                                     <td><b>Full House Cleaner</b></td>
-                                    <td>Jane Cooper</td>
+                                    <td>Maedah</td>
                                     <td>
                                         <ul class="rating-stars">
                                             <li style="width: 100%" class="stars-active">
@@ -259,7 +259,7 @@
                                     </td>
                                     <td>13.03.2020</td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                       
                                       
                                         <!-- dropdown //end -->
                                     </td>
