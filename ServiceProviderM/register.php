@@ -3,6 +3,8 @@ session_start();
 include("connection.php");
 include("functions.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $category = $_POST['category'];
+
     $username = $_POST['user_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -29,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $userid = random_int(1,100);
             // Insert new user into the database
+            if ($category == 'servicep') {
             $query = "INSERT INTO service_p (user_id, user_name, password, email, mobile_number, location) VALUES ('$userid', '$username', '$hashed_password',  '$email', '$mobilenumber', '$location')";
             if (mysqli_query($con, $query)) {
                 $_SESSION['user_id'] = mysqli_insert_id($con);
@@ -37,9 +40,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $error = "Error: " . mysqli_error($con);
             }
+        } else {
+                $query = "INSERT INTO user_data (userID, username, password, email, mobile_number) VALUES ('$userid', '$username', '$hashed_password',  '$email', '$mobilenumber')";    
+                if (mysqli_query($con, $query)) {
+                    $_SESSION['userID'] = mysqli_insert_id($con);
+                    header("Location: customerorder.php");
+                    exit;
+                } else {
+                    $error = "Error: " . mysqli_error($con);
+                }
+            }
+           
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +111,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h4 class="card-title mb-4">Create an Account</h4>
 <form method="post">
 <input type="hidden" name="csrfmiddlewaretoken" value="0ADj76FFRqL2skoCZ0gPjcF3DnOH7gjcH5X0WW6mEWaN8vjDNOpLq4JIGQM4GPMv">
+<div class="mb-3">
+                            <select class="form-control" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="customer">Customer</option>
+                                <option value="servicep">Service_Provider</option>
+                            </select>
+                        </div>
 <div class="mb-3">
 <label class="form-label">Username</label>
 <input id="user_name" class="form-control" placeholder="Your Username" name="user_name" maxlength="149" type="text" required />

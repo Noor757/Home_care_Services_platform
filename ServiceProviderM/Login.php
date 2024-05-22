@@ -3,9 +3,10 @@ session_start();
 include("connection.php");
 include("functions.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $category = $_POST['category'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    if($category == 'servicep'){
     // Example validation (replace with actual validation logic)
     $query = "SELECT * FROM service_p WHERE email = '$email' AND password = '$password' LIMIT 1";
     $result = mysqli_query($con, $query);
@@ -18,6 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error = "Invalid email or password";
     }
+} else {
+    $query = "SELECT * FROM user_data WHERE email = '$email' AND password = '$password' LIMIT 1";
+    $result = mysqli_query($con, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user_data = mysqli_fetch_assoc($result);
+        $_SESSION['user_id'] = $user_data['user_id'];
+        header("Location: customerorder.php");
+        exit;
+    } else {
+        $error = "Invalid email or password";
+    }
+}
 }
 ?>
 
@@ -79,10 +93,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h4 class="card-title mb-4">Sign in</h4>
 <form method="post" >
 <input type="hidden" name="csrfmiddlewaretoken" value="Y2HLoEfwBQFYzPwnqM4zfJPy29DOH8g8Fx1sduGdom4Jf0roeAdvmBTd5CBbgHJr">
+
 <div class="mb-3">
+                            <select class="form-control" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="customer">Customer</option>
+                                <option value="servicep">Service_Provider</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
 <input class="form-control" name="email"  placeholder=" email" type="text" />
 </div>
-
 <div class="mb-3">
 <input class="form-control" name="password" placeholder="Password" type="password" />
 </div>

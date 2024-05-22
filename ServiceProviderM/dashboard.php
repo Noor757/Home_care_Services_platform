@@ -4,11 +4,11 @@ include("connection.php");
 include("functions.php");
 
 // Check if the session variable is set
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['userID']) ) {
     // Handle the case where the user is not logged in (redirect or show an error)
     die("User not logged in.");
 }
-
+$userID = $_SESSION['userID'];
 $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the session
 
 
@@ -56,11 +56,7 @@ $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the sessio
                         <span class="text">Services</span>
                     </a>
 
-                </li>
-
-
-                </li>
-                
+               
                 <li class="menu-item">
                     <a class="menu-link" href="reviews.php">
                         <i class="icon material-icons md-comment"></i>
@@ -364,21 +360,9 @@ if ($stmt = $con->prepare($sql)) {
                     <h4 class="card-title">Latest orders</h4>
                     <div class="row align-items-center">
                         <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                            <div class="custom_select">
-                                <select class="form-select select-nice">
-                                    <option selected>All Categories</option>
-                                    <option>Maid</option>
-                                    <option>BabySitter</option>
-                                    <option>Gardener</option>
-                                    <option>Electrician</option>
-                                    <option>Mechanic</option>
-
-                                </select>
-                            </div>
+                           
                         </div>
-                        <div class="col-md-2 col-6">
-                            <input type="date" value="02.01.2024" class="form-control" />
-                        </div>
+                     
                         <div class="col-md-2 col-6">
                             <div class="custom_select">
                                 <select class="form-select select-nice">
@@ -537,15 +521,7 @@ if ($stmt = $con->prepare($sql)) {
             </div>
             <div class="pagination-area mt-30 mb-50">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-start">
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-
-                        <li class="page-item">
-                            <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
-                        </li>
-                    </ul>
+                  
                 </nav>
             </div>
         </section>

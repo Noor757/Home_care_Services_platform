@@ -4,11 +4,11 @@ session_start();
 include 'connection.php';
 
 // Check if the session variable is set
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['userID'])) {
     // Handle the case where the user is not logged in (redirect or show an error)
     die("User not logged in.");
 }
-
+$userID = $_SESSION["userID"];
 $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the session
 
 
@@ -74,6 +74,7 @@ if (isset($_POST['delete'])) {
                         <span class="text">Services</span>
                     </a>
                 </li>
+                
                 <li class="menu-item">
                     <a class="menu-link" href="reviews.php">
                         <i class="icon material-icons md-comment"></i>
@@ -162,13 +163,13 @@ if (isset($_POST['delete'])) {
                 <!-- card-header end// -->
                 <div class="card-body">
                     <?php
-
+                    
                     $sql = "SELECT  all_services.service_id, all_services.service_name, all_services.service_price, all_services.service_status, all_services.service_description, all_services.service_location
                             FROM userservices
                             JOIN service_p ON userservices.user_id = service_p.user_id
                             JOIN all_services ON userservices.service_id = all_services.service_id
                             WHERE userservices.user_id = ?";
-                    
+                   // $row_count = mysqli_num_rows($con->query("$sql"));
                     if ($stmt = $con->prepare($sql)) {
                         $stmt->bind_param("i", $user_id);
                         $stmt->execute();

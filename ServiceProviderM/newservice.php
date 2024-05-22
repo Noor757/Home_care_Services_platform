@@ -3,6 +3,7 @@ include 'connection.php'; // Include your database connection file
 
 session_start();
 $user_id = $_SESSION['user_id']; // Get the user ID from the session
+$userID = $_SESSION['userID'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a service ID is selected
